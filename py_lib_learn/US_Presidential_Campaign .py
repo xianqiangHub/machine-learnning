@@ -75,5 +75,32 @@ data.contbr_employer = data.contbr_employer.map(f)
 data[data['contb_receipt_amt'] > 0]
 
 bins = np.array([0, 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000])
-labels = pd.cut(data['contb_receipt_amt'], bins)
-print(labels)
+labels = pd.cut(data['contb_receipt_amt'], bins)  # 离散化，每个值显示对应的区间，或者别名
+
+# 分组候选人，求出每个候选人的出资最高的职业
+# groupby之后接head，可以显示抽样显示出head几
+grouped = data.groupby('cand_nm')
+
+
+# 对每个单独的组进行apply函数的操作
+def get_top_amounts(group, key, n=5):
+    totals = group.groupby(key)['contb_receipt_amt'].sum()
+    return totals.sort_values(ascending=False)[:n]
+
+#选出只需要的候选人数据集
+# data_vs = data[data['cand_nm'].isin(['Obama, Barack','Romney, Mitt'])].copy()
+
+
+# print(grouped.apply(get_top_amounts, 'contbr_occupation', n=7))
+
+# 完整查看分组之后样子的sao操作
+# for name, group in student.groupby('Sex'):
+#     print(name, group, '\n')
+
+#时间：
+# datetime(%Y,%m,%d,%H,%M,%S)
+# print(pd.datetime(2019, 10, 17)) #2019-10-17 00:00:00
+# data_vs['time'] = pd.to_datetime(data_vs['contb_receipt_dt'])
+# 4-Jul-11 2011-07-04
+# to_datetime转变str到datetime类型，是新增一列再赋值
+

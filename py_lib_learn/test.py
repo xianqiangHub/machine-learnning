@@ -17,10 +17,12 @@ stu_dic = {'Age': [14, 13, 13, 14, 14, 12, 12, 15, 13, 12, 11, 14, 12, 15, 16, 1
            'Weight': [112.5, 84, 98, 102.5, 102.5, 83, 84.5, 112.5, 84, 99.5, 50.5, 90, 77, 112, 150, 128, 133, 85,
                       112]}
 student = pd.DataFrame(stu_dic)
-student['Kaa'] = [11, 1, 1, 1, 1, 1, 7, 8, 9, 10, 11, 1, 2, 12, 1, 1, 1, 3, 3]
+student['time'] = ['4-Jul-11', '4-Jul-11', '4-Jul-11', '4-Jul-11', '4-Jul-11', '4-Jul-11', '4-Jul-11', '4-Jul-11',
+                   '4-Jul-11', '4-Jul-11', '4-Jul-11', '4-Jul-11', '4-Jul-11', '4-Jul-11', '4-Jul-11', '4-Jul-11',
+                   '4-Jul-11', '4-Jul-11', '4-Jul-11']
 
 # print(student.groupby('Sex').mean())
-print(student['Age'] > 12)
+# print(student['Age'] > 12)
 
 occupation_map = {
     'INFORMATION REQUESTED PER BEST EFFORTS': 'NOT PROVIDED',
@@ -32,3 +34,14 @@ occupation_map = {
 }
 
 # print(occupation_map.get('aaa','bb'))
+
+# print(student.groupby('Sex').head(2))
+
+# for name, group in student.groupby('Sex'):
+#     print(name, group, '\n')
+
+# print(student.set_index('Sex'))
+
+#str转time
+pd.to_datetime(student['time'])
+print(student)
